@@ -6,7 +6,7 @@
             $arg = array_pop($arg);
             return (!(self::$instance instanceof self) || !empty($arg)) ? self::$instance = new static(...(array) $arg) : self::$instance;
         }
-     /*    function __set($name, $value){
+    /*    function __set($name, $value){
             $this->$name = $value;
         } */
     }
@@ -36,5 +36,5 @@
     }
     spl_autoload_register('autoload');
 
-    work_reference::getInstance(json_decode(file_get_contents("php://input"), true))->postWork_reference();
+   // work_reference::getInstance(json_decode(file_get_contents("php://input"), true))->postWork_reference();
     ?>
