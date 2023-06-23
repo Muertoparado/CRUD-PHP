@@ -1,5 +1,7 @@
 <?php
 
+use Config\Database\connect;
+
 header("Access-Control-Allow-Origin:*");
 header("Content-Type: application/json");
 

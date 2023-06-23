@@ -10,26 +10,27 @@ class connect {
     private $pdo;
     private $user;
     private $password;
+    private $port;
     function __construct()
     {
+        //echo "asdasd";
         try {
-            $this->host = $_ENV['host'];
-            $this->dbname = $_ENV['database'];
-            $this->user = $_ENV['user'];
-            $this->password = $_ENV['password'];
+            $this->host = $_ENV['HOST'];
+            $this->dbname = $_ENV['DATABASE'];
+            $this->user = $_ENV['USER'];
+            $this->password = $_ENV['PASSWORD'];
+            $this->port = $_ENV['PORT'];
 
-            $dsn = "mysql:host=". $this->host .";database=". $this->dbname;
-            $this->pdo = new PDO($dsn, $this->user, $this->password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dsn = "mysql:host=". $this->host . ";database=". $this->dbname;
+        $this->pdo = new PDO($dsn, $this->user, $this->password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //$this->pdo = new PDO("mysql:host=".$this->host.";port=".$this->port.";dbname=".$this->dbname.";user=".$this->user.";password=".$this->password);
+        //$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            
-           // $this->conx = new PDO($this->driver.":host=".$this->__get('host').";port=".$this->port.";dbname=".$this->__get('dbname').";user=".$this->user.";password=".$this->password);
-           // $this->conx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo"ok";
         } catch (\PDOException $e) {
-            return [
-                'message'=> 'error conexion',
-                'error'=> $e->getMessage(),
-            ];
+                         //  echo 'message'=> 'error conexion';
+                        print_r('error'.$e->getMessage());
         }
     }
 
