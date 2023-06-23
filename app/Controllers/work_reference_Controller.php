@@ -12,6 +12,7 @@ class work_reference_Controller{
 
     public function getWorkReference(){
         try {
+            echo"get work reference";
             $workReference = work_reference_Model::getAllWork_reference();
         } catch (\Throwable $th) {
             echo $th->getMessage();

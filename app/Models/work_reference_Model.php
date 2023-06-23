@@ -61,9 +61,11 @@ class work_reference_Model {
         }
     }
 
-    
-
-    
-}
+    public static function deleteIdWork_reference($id){
+            $stmt= self::$conx->prepare($queryDelete);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        }
+    }
 
 ?>
