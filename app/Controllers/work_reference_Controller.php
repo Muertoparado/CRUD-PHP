@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
+use PDO;
 use App\Models\work_reference_Model;
-
+use Config\Database\Connection;
 class work_reference_Controller{
 
-    public function __construct(){
+/*     public function __construct(){
 
-    }
+    } */
+
+    
 
     public function getWorkReference(){
         try {
@@ -23,10 +26,22 @@ class work_reference_Controller{
         try {
             $datos = json_decode(file_get_contents('php://input'),true);
             $pReference = new work_reference_Model(...$datos);  
-            echo json_encode($pReference>PostWorkReference());
+            echo json_encode($pReference->postWork_reference());
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
     }   
+
+    public function DeleteWorkReference(){
+        try {   
+            $datos = json_decode(file_get_contents('php://input'),true);
+            $pReference = new work_reference_Model(...$datos['id']);  
+            echo json_encode($pReference->deleteIdWork_reference());
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+
 }
 ?>

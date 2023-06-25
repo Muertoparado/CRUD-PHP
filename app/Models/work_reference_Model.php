@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use config\Database\Connection;
 use PDO;
 use Exception;
 
 class work_reference_Model {
-    protected static $conx;
+   // protected static $conx;   
     public $message;/* revisar */
     private $queryPost = 'INSTERT INTO work_reference(id,  full_name, cel_number, position, company) VALUES(:id, :name, :number, :position, :company)';
     private $queryGetAll = 'SELECT id AS "cc", full_name AS "name", cel_number AS "number", position AS "position", company AS "company" FROM work_reference';
@@ -32,9 +33,11 @@ class work_reference_Model {
         throw new Exception("Propiedad invalidaa: " . $name);
     }
 
+
     public static function postWork_reference(){
         try {
-            $res = self::$conx->prepare(self::$queryPost);
+            $conx = new Connection;
+            $res = $conx->connect()->prepare(self::$queryPost);
             $res->bindValue("id", self::$Id);
             $res->bindValue("name", self::$Full_name);
             $res->bindValue("number", self::$Cel_number);
@@ -51,7 +54,8 @@ class work_reference_Model {
 
     public static function getAllWork_reference(){
         try {
-            $res = self::$conx->prepare(self::$queryGetAll);
+            $conx = new Connection;
+            $res = $conx->connect()->prepare(self::$queryGetAll);
             $res->execute();
             self::$message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch(\PDOException $e) {
@@ -61,11 +65,19 @@ class work_reference_Model {
         }
     }
 
-    public static function deleteIdWork_reference($id){
-            $stmt= self::$conx->prepare($queryDelete);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
+    public static function deleteIdWork_reference(){
+        try {
+            $conx = new Connection;
+            $res= $conx->connect()->prepare(self::$queryDelete);
+            $res->bindParam(':id', $id);
+            $res->execute();
+            self::$message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+        } catch(\PDOException $e) {
+            self::$message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
+        }finally{
+            print_r(self::$message);
         }
     }
+}
 
 ?>
