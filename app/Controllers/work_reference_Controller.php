@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use PDO;
 use App\Models\work_reference_Model;
-use Config\Database\Connection;
 class work_reference_Controller{
 
 /*     public function __construct(){
@@ -13,7 +12,7 @@ class work_reference_Controller{
 
     
 
-    public function getWorkReference(){
+    public function GetWorkReference(){
         try {
             echo"get work reference";
             $workReference = work_reference_Model::getAllWork_reference();
