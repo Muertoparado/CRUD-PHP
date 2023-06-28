@@ -19,7 +19,7 @@ class Connection {
             $this->dbname = $_ENV['DATABASE'];
             $this->user = $_ENV['USER'];
             $this->password = $_ENV['PASSWORD'];
-            $this->port = $_ENV['PORT'];
+         //   $this->port = $_ENV['PORT'];
 
             $dsn = 'mysql:host=' . $this->host . ';dbname='. $this->dbname;
             $this->pdo = new PDO($dsn,$this->user,$this->password,);
@@ -34,6 +34,7 @@ class Connection {
                           // echo ('message'=> 'error conexion');
                         print_r('error'.$e->getMessage());
         }
+        return $this->connect();
     }
 
     public function connect(){

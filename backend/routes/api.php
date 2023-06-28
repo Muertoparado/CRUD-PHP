@@ -9,11 +9,11 @@ $dotenv->load();
 $routes = new \Bramus\Router\Router();
 
 $routes->mount('/workrefence', function() use ($routes) {
-    echo"wr";
+    
     $routes->get('/', 'app\Controllers\work_reference_Controller@GetWorkReference');
     $routes->post('/add', 'app\Controllers\work_reference_Controller@PostWorkReferences');
     $routes->delete('/delete', 'app\Controllers\work_reference_Controller@DeleteWorkReferences');
-    
+    echo"wr";
 });
 
 $routes->mount('/personalref', function() use ($routes) {
@@ -21,7 +21,7 @@ $routes->mount('/personalref', function() use ($routes) {
     $routes->post('/add', 'app\Controllers\personal_ref_Controller@PostPersonalRef');
     $routes->put('/{id}', 'app\Controllers\personal_ref_Controller@PutPersonalRef');
     $routes->delete('/{id}', 'app\Controllers\personal_ref_Controller@DeletePersonalRef');
-
+    echo"pr";
 });
 
 $routes->mount('/workinginfo', function() use ($routes) {
